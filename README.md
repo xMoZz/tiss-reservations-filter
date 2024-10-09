@@ -33,6 +33,7 @@ This project provides a script to filter events from an iCal calendar feed, crea
 Edit the filter calendar.py file to update the configuration settings:
 - api_url: The URL of your iCal feed.
 - github_token: Your GitHub token for authentication.
+- github-repository: Your repository directory
 
 ## Usage
 
