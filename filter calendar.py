@@ -4,11 +4,13 @@ from datetime import datetime, time
 import base64
 import time as time2
 
+#===================================================================
 # Config:
 api_url = "your-tiss-api-url" 
 github_token = "your-github-token" 
-
-
+github_repository = "your github-repository"
+github_name = "your name on github "
+#===================================================================
 
 #------------------------------------------------------------
 
@@ -152,7 +154,7 @@ def main():
         filtered_events = filter_events(events)
         ical_data = create_ical(filtered_events)
         path = get_file(ical_data)
-        github_upload("filtered_calendar.ics", "your-github-name", "your-repository", branch='main', commit_message='Upload file')
+        github_upload("filtered_calendar.ics", github_name, github_repository, branch='main', commit_message='Upload file')
 
         print("Waiting for 24 hours...")
         time2.sleep(60*60*24) #wait a day cause google cal only updates once a day
