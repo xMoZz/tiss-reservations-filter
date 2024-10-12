@@ -7,7 +7,7 @@ import json
 
 
 #load config:
-with open("pconfig.json") as f:
+with open("config.json") as f:
     config = json.load(f)
     api_url = config["api_url"]
     github_token = config["github_token"]
@@ -38,7 +38,7 @@ def get_events_from_ical(api):
         return []
 
 
-def filter_events(events):
+def filter_spk(events):
     # Define the time range boundaries (here 8 tp 20 because spks start and end at 8 and 20)
     start_time = time(8, 0)
     end_time = time(20, 0)
@@ -61,6 +61,35 @@ def filter_events(events):
     events[:] = filtered_events
     return events
 
+def name_change(events):
+    for event in events:
+        if event['summary'] == "101.A26 VU Angleichungskurs Mathematik":
+            event['summary'] = "AKMath (101.A26 VU)"
+        elif event['summary'] == "101.A27 VU Angleichungskurs Mathematik für INF und WINF":
+            event['summary'] = "AKMath (101.A27 VU)"
+        elif event['summary'] == "192.134 VU Grundzüge digitaler Systeme":
+            event['summary'] = "GdS (192.134 VU)"
+        elif event['summary'] == "185.A91 VU Einführung in die Programmierung 1":
+            event['summary'] = "EP1 (185.A91 VU)"
+        elif event['summary'] == "104.631 VU Mathematisches Arbeiten für Informatik und Wirtschaftsinformatik":
+            event['summary'] = "MAI (104.631 VU)"
+        elif event['summary'] == "104.633 VU Algebra und Diskrete Mathematik für Informatik und Wirtschaftsinformatik":
+            event['summary'] = "AdM (104.633 VU)"
+        elif event['summary'] == "187.B12 VU Denkweisen der Informatik":
+            event['summary'] = "Denki (187.B12 VU)"
+        elif event['summary'] == "180.766 VU Orientierung Informatik und Wirtschaftsinformatik":
+            event['summary'] = "Orientierung (180.766 VU)"
+
+        #Gruppen:
+        elif event['summary'].startswith("104.633 VU Algebra und Diskrete Mathematik für Informatik und Wirtschaftsinformatik - Gruppe"):
+            event['summary'] = "AdM (104.633 VU) - Übungsgruppe"
+        elif event['summary'].startswith("104.631 VU Mathematisches Arbeiten für Informatik und Wirtschaftsinformatik -"):
+            event['summary'] = "MAI (104.631 VU) - Übungsgruppe"
+        elif event['summary'].startswith("185.A91 VU Einführung in die Programmierung 1 - "):
+            event['summary'] = "EP1 (185.A91 VU) - Übungsgruppe"
+    return events
+
+
 
 def create_ical(events):
     calendar = Calendar()
@@ -70,8 +99,8 @@ def create_ical(events):
         event_component.add('summary', event['summary'])
         event_component.add('dtstart', event['start'])
         event_component.add('dtend', event['end'])
-        event_component.add('location', event.get('location', ''))  # Use get() to avoid errors
-        event_component.add('description', event.get('description', ''))  # Use get() to avoid errors
+        event_component.add('location', event.get('location', ''))
+        event_component.add('description', event.get('description', ''))
 
         calendar.add_component(event_component)
 
@@ -128,8 +157,12 @@ def github_upload(filename, repo_owner, repo_name, branch='main', commit_message
 def main():
     while True: 
         events = get_events_from_ical(api_url)
-        filtered_events = filter_events(events)
-        ical_data = create_ical(filtered_events)
+
+        events = filter_spk(events)
+        events = name_change(events)
+
+        ical_data = create_ical(events)
+
         github_upload("filtered_calendar.ics", github_name, github_repository, branch='main', commit_message='Upload file')
 
         print("Waiting for 24 hours...")
