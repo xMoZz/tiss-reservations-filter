@@ -18,9 +18,9 @@ This project provides a script to filter events from an iCal calendar feed, crea
 ## Installation
 
 1. Clone the repository:
-   bash
+   `bash
    git clone https://github.com/xMoZz/tiss-reservations-filter.git
-   cd tiss-reservations-filter
+   cd tiss-reservations-filter`
    
 
 2. Install the required libraries:
@@ -30,7 +30,7 @@ This project provides a script to filter events from an iCal calendar feed, crea
 
 ## Configuration
 
-Edit the filter calendar.py file to update the configuration settings:
+Edit the `config.json` file to update the configuration settings:
 - api_url: The URL of your iCal feed.
 - github_token: Your GitHub token for authentication.
 - github_repository: Your repository directory
