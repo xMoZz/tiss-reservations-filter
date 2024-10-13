@@ -13,7 +13,9 @@ with open("config.json") as f:
     github_token = config["github_token"]
     github_repository = config["github_repository"]
     github_name = config["github_name"]
+    file_name = config["file_name"]
 
+#--------------------------------------------
 
 def get_events_from_ical(api):
     response = requests.get(api)
@@ -106,9 +108,9 @@ def create_ical(events):
 
     #back to ical
     ical_data = calendar.to_ical()
-    with open("filtered_calendar.ics", "wb") as f:
+    with open(file_name, "wb") as f:
         f.write(ical_data)
-    return "filtered_calendar.ics"
+    return file_name
 
 
 def github_upload(filename, repo_owner, repo_name, branch='main', commit_message='Upload file'):
@@ -154,6 +156,9 @@ def github_upload(filename, repo_owner, repo_name, branch='main', commit_message
         print('Failed to upload file:', response.json())
 
 
+#--------------------------------------------
+
+
 def main():
     while True: 
         events = get_events_from_ical(api_url)
@@ -163,7 +168,7 @@ def main():
 
         ical_data = create_ical(events)
 
-        github_upload("filtered_calendar.ics", github_name, github_repository, branch='main', commit_message='Upload file')
+        github_upload(file_name, github_name, github_repository, branch='main', commit_message='Updated calendar file!')
 
         print("Waiting for 24 hours...")
         time2.sleep(60*60*24) #wait a day cause google cal only updates once a day

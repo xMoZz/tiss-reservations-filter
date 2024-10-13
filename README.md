@@ -6,6 +6,7 @@ This project provides a script to filter events from an iCal calendar feed, crea
 
 - Fetch events from an iCal URL.
 - Filter events 
+- Change name of events  
 - Create a new iCal file with the filtered events.
 - Upload the new iCal file to a specified GitHub repository.
 
@@ -35,6 +36,7 @@ Edit the `config.json` file to update the configuration settings:
 - github_token: Your GitHub token for authentication.
 - github_repository: Your repository directory
 - github_name: Your name on Github
+- file_name: The name of the iCal file to be created and uploaded to github.
 
 ## Usage
 
@@ -46,15 +48,8 @@ python filter\ calendar.py
 The script will:
 1. Fetch events from the specified iCal feed.
 2. Filter events outside the 8 AM to 8 PM time range.
+3. Change the name of the events to shorter more readable names (you have to configure your prefered names and which events should be renamed yourself).
 3. Create a new iCal file with the filtered events.
 4. Upload the new iCal file to the specified GitHub repository (from where you can host it on a website, in order to add it as an URL into a prefered calendar service).
 
 The script will repeat this process every 24 hours since most calendar services only sinc once a day.
-
-## Functions
-
-- get_events_from_ical(api): Fetches events from the iCal feed.
-- filter_events(events): Filters events based on the specified time range.
-- create_ical(events): Creates a new iCal file with the filtered events.
-- get_file(ical_data): Saves the iCal data to a file.
-- github_upload(filename, repo_owner, repo_name, branch='main', commit_message='Upload file'): Uploads the file to the specified GitHub repository.

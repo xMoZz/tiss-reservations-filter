@@ -2,5 +2,6 @@
   "api_url": "your-tiss-api-url",
     "github_token": "your-github-token",
     "github_repository": "your github-repository",
-    "github_name": "your name on github "
+    "github_name": "your name on github ",
+    "file_name": "filtered_calendar.ics"
 }
