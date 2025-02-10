@@ -83,15 +83,15 @@ def name_change(events):
             event['summary'] = "Orientierung (180.766 VU)"
 
         # 2. Semester:
-        elif event['summary'] == "186.866 Algorithmen und Datenstrukturen":
+        elif event['summary'] == "186.866 VU Algorithmen und Datenstrukturen":
             event['summary'] = "AlgoDat (186.866 VU)"
-        elif event['summary'] == "185.A92 Einführung in die Programmierung 2":
+        elif event['summary'] == "185.A92 VU Einführung in die Programmierung 2":
             event['summary'] = "EP2 (185.A92 VU)"
-        elif event['summary'] == "191.003 Computersysteme":
-            event['summary'] = "CSys (191.003 VU)"
-        elif event['summary'] == "184.686 Datenbanksysteme":
+        elif event['summary'] == "191.003 VU Computersysteme":
+            event['summary'] = "Computersysteme (191.003 VU)"
+        elif event['summary'] == "184.686 VU Datenbanksysteme":
             event['summary'] = "Datenbanksysteme (184.686 VU)"
-        elif event['summary'] == "104.634 Analysis für Informatik und Wirtschaftsinformatik":
+        elif event['summary'] == "104.634 VU Analysis für Informatik und Wirtschaftsinformatik":
             event['summary'] = "Analysis (104.634 VU)"
 
 
