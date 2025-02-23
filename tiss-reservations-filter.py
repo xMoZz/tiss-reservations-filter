@@ -93,6 +93,9 @@ def name_change(events):
             event['summary'] = "Datenbanksysteme (184.686 VU)"
         elif event['summary'] == "104.634 VU Analysis für Informatik und Wirtschaftsinformatik":
             event['summary'] = "Analysis (104.634 VU)"
+        elif event['summary'] == "186.822 VU Einführung in Visual Computing":
+            event['summary'] = "EVC (186.822 VU)"
+
 
 
         #Gruppen:
