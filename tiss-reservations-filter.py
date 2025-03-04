@@ -105,6 +105,17 @@ def name_change(events):
             event['summary'] = "MAI (104.631 VU) - Übungsgruppe"
         elif event['summary'].startswith("185.A91 VU Einführung in die Programmierung 1 - "):
             event['summary'] = "EP1 (185.A91 VU) - Übungsgruppe"
+
+        #2. Semester
+        elif event['summary'].startswith("104.634 VU Analysis für Informatik und Wirtschaftsinformatik -"):
+            event['summary'] = "Analysis - Übungsgruppe"
+        elif event['summary'].startswith("184.686 VU Datenbanksysteme -"):
+            event['summary'] = "Datenbanksysteme - Übungsgruppe"
+        elif event['summary'].startswith("185.A92 VU Einführung in die Programmierung 2 -"):
+            event['summary'] = "EP2 - Übungsgruppe"
+        elif event['summary'].startswith("186.866 VU Algorithmen und Datenstrukturen -"):
+            event['summary'] = "AlgoDat - Übungsgruppe"
+
     return events
 
 
