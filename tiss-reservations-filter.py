@@ -90,7 +90,7 @@ def name_change(events):
         elif event['summary'] == "191.003 VU Computersysteme":
             event['summary'] = "Computersysteme (191.003 VU)"
         elif event['summary'] == "184.686 VU Datenbanksysteme":
-            event['summary'] = "Datenbanksysteme (184.686 VU)"
+            event['summary'] = "DBS (184.686 VU)"
         elif event['summary'] == "104.634 VU Analysis für Informatik und Wirtschaftsinformatik":
             event['summary'] = "Analysis (104.634 VU)"
         elif event['summary'] == "186.822 VU Einführung in Visual Computing":
@@ -110,7 +110,7 @@ def name_change(events):
         elif event['summary'].startswith("104.634 VU Analysis für Informatik und Wirtschaftsinformatik -"):
             event['summary'] = "Analysis - Übungsgruppe"
         elif event['summary'].startswith("184.686 VU Datenbanksysteme -"):
-            event['summary'] = "Datenbanksysteme - Übungsgruppe"
+            event['summary'] = "DBS - Übungsgruppe"
         elif event['summary'].startswith("185.A92 VU Einführung in die Programmierung 2 -"):
             event['summary'] = "EP2 - Übungsgruppe"
         elif event['summary'].startswith("186.866 VU Algorithmen und Datenstrukturen -"):
