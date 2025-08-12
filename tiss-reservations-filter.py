@@ -96,9 +96,21 @@ def name_change(events):
         elif event['summary'] == "186.822 VU Einführung in Visual Computing":
             event['summary'] = "EVC (186.822 VU)"
 
+        # 3. Semester:
+        elif event['summary'] == "107.254 VO Statistik und Wahrscheinlichkeitstheorie":
+            event['summary'] = "Statistik (107.254 VO)"
+        elif event['summary'] == "194.020 VU Software Engineering":
+            event['summary'] = "SE (194.020 VU)"
+        elif event['summary'] == "192.017 VU Theoretische Informatik":
+            event['summary'] = "TI (192.017 VU)"
+        elif event['summary'] == "194.023 VU Programmierparadigmen":
+            event['summary'] = "Propa (194.023 VU)"
+        elif event['summary'] == "191.002 VU Betriebssysteme":
+            event['summary'] = "OS (191.002 VU)"
 
 
         #Gruppen:
+        #1. Semester
         elif event['summary'].startswith("104.633 VU Algebra und Diskrete Mathematik für Informatik und Wirtschaftsinformatik - Gruppe"):
             event['summary'] = "AdM (104.633 VU) - Übungsgruppe"
         elif event['summary'].startswith("104.631 VU Mathematisches Arbeiten für Informatik und Wirtschaftsinformatik -"):
@@ -115,6 +127,9 @@ def name_change(events):
             event['summary'] = "EP2 - Übungsgruppe"
         elif event['summary'].startswith("186.866 VU Algorithmen und Datenstrukturen -"):
             event['summary'] = "AlgoDat - Übungsgruppe"
+
+        #3. Semester
+        """missing"""
 
     return events
 
@@ -197,8 +212,8 @@ def main():
 
         github_upload(file_name, github_name, github_repository, branch='main', commit_message='Updated calendar file!')
 
-        print("Waiting for 24 hours...")
-        time2.sleep(60*60*24) #wait a day cause google cal only updates once a day
+        print("Waiting for 12 hours...")
+        time2.sleep(60*60*12) #wait half a day
         
 
 if __name__ == "__main__":
