@@ -15,6 +15,11 @@ with open("config.json") as f:
     github_name = config["github_name"]
     file_name = config["file_name"]
 
+#other config
+swapname = True #set false if you dont want to have renamed entries
+vlfz = True #set false if you dont want to have simpler holiday indicators
+
+
 #--------------------------------------------
 
 def get_events_from_ical(api):
@@ -65,6 +70,8 @@ def filter_spk(events):
 
 def name_change(events):
     for event in events:
+
+        #1. Semester
         if event['summary'] == "101.A26 VU Angleichungskurs Mathematik":
             event['summary'] = "AKMath (101.A26 VU)"
         elif event['summary'] == "101.A27 VU Angleichungskurs Mathematik für INF und WINF":
@@ -198,6 +205,55 @@ def github_upload(filename, repo_owner, repo_name, branch='main', commit_message
         print('Failed to upload file:', response.json())
 
 
+
+
+def split_vlfz(events):
+    new_events = []
+    for event in events:
+        if event['summary'] in [
+            "Sommerferien, vorlesungsfrei",
+            "Weihnachtsferien, vorlesungsfrei",
+            "Semesterferien, vorlesungsfrei",
+            "Osterferien, vorlesungsfrei"
+        ]:
+
+            start_event = {
+                "summary": "Anfang der Vorlesungsfreien Zeit",
+                "start": datetime.combine(
+                    event['start'].date() if isinstance(event['start'], datetime) else event['start'],
+                    time(0, 0)
+                ),
+                "end": datetime.combine(
+                    event['start'].date() if isinstance(event['start'], datetime) else event['start'],
+                    time(23, 59)
+                ),
+                "location": event.get('location', ''),
+                "description": event.get('description', '')
+            }
+
+            end_event = {
+                "summary": "Ende der Vorlesungsfreien Zeit",
+                "start": datetime.combine(
+                    event['end'].date() if isinstance(event['end'], datetime) else event['end'],
+                    time(0, 0)
+                ),
+                "end": datetime.combine(
+                    event['end'].date() if isinstance(event['end'], datetime) else event['end'],
+                    time(23, 59)
+                ),
+                "location": event.get('location', ''),
+                "description": event.get('description', '')
+            }
+
+            new_events.append(start_event)
+            new_events.append(end_event)
+        else:
+            new_events.append(event)
+
+    return new_events
+
+
+
 #--------------------------------------------
 
 
@@ -206,7 +262,11 @@ def main():
         events = get_events_from_ical(api_url)
 
         events = filter_spk(events)
-        events = name_change(events)
+
+        if swapname:
+            events = name_change(events)
+        if vlfz:
+            events = split_vlfz(events)
 
         ical_data = create_ical(events)
 
