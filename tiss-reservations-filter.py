@@ -136,7 +136,8 @@ def name_change(events):
             event['summary'] = "AlgoDat - Übungsgruppe"
 
         #3. Semester
-        """missing"""
+        elif event['summary'].startswith("107.369 UE Statistik und Wahrscheinlichkeitstheorie -"):
+            event['summary'] = "Statistik - Übungsgruppe"
 
     return events
 
