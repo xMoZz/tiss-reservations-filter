@@ -109,9 +109,9 @@ def name_change(events):
         elif event['summary'] == "194.020 VU Software Engineering":
             event['summary'] = "SE (194.020 VU)"
         elif event['summary'] == "192.017 VU Theoretische Informatik":
-            event['summary'] = "TI (192.017 VU)"
+            event['summary'] = "ThInf (192.017 VU)"
         elif event['summary'] == "194.023 VU Programmierparadigmen":
-            event['summary'] = "Propa (194.023 VU)"
+            event['summary'] = "ProPa (194.023 VU)"
         elif event['summary'] == "191.002 VU Betriebssysteme":
             event['summary'] = "OS (191.002 VU)"
 
